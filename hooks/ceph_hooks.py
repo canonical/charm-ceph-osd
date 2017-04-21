@@ -469,12 +469,20 @@ def update_nrpe_config():
     apt_install('python-dbus')
     hostname = nrpe.get_nagios_hostname()
     current_unit = nrpe.get_nagios_unit_name()
+
+    # create systemd or upstart check
+    cmd = '/bin/cat /var/lib/ceph/osd/ceph-*/whoami |'
+    if os.path.exists('/run/systemd/system'):
+       cmd += 'xargs -I_@ /usr/local/lib/nagios/plugins/check_systemd.py ceph-osd@_@'
+    else:
+       cmd += 'xargs -I@ status ceph-osd id=@'
+    cmd += ' && exit 0 || exit 2'
+
     nrpe_setup = nrpe.NRPE(hostname=hostname)
     nrpe_setup.add_check(
         shortname='ceph-osd',
         description='process check {%s}' % current_unit,
-        check_cmd=('/bin/cat /var/lib/ceph/osd/ceph-*/whoami |'
-                   'xargs -I@ status ceph-osd id=@ && exit 0 || exit 2')
+        check_cmd=cmd
     )
     nrpe_setup.write()
 
