@@ -1326,6 +1326,10 @@ class NeutronAPIContext(OSContextGenerator):
                 'rel_key': 'enable-l3ha',
                 'default': False,
             },
+            'dns_domain': {
+                'rel_key': 'dns-domain',
+                'default': None,
+            },
         }
         ctxt = self.get_neutron_options({})
         for rid in relation_ids('neutron-plugin-api'):
