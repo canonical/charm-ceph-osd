@@ -230,6 +230,7 @@ def get_ceph_context():
         'mon_hosts': ' '.join(mon_hosts),
         'fsid': get_fsid(),
         'old_auth': cmp_pkgrevno('ceph', "0.51") < 0,
+        'crush_initial_weight': config('crush-initial-weight'),
         'osd_journal_size': config('osd-journal-size'),
         'osd_max_backfills': config('osd-max-backfills'),
         'osd_recovery_max_active': config('osd-recovery-max-active'),

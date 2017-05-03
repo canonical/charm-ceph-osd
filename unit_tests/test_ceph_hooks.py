@@ -30,7 +30,8 @@ CHARM_CONFIG = {'config-flags': '',
                 'use-direct-io': True,
                 'osd-format': 'ext4',
                 'prefer-ipv6': False,
-                'customize-failure-domain': False}
+                'customize-failure-domain': False,
+                'crush-initial-weight': '0'}
 
 
 class CephHooksTestCase(unittest.TestCase):
@@ -61,6 +62,7 @@ class CephHooksTestCase(unittest.TestCase):
                     'loglevel': 1,
                     'mon_hosts': '10.0.0.1 10.0.0.2',
                     'old_auth': False,
+                    'crush_initial_weight': '0',
                     'osd_journal_size': 1024,
                     'osd_max_backfills': 1,
                     'osd_recovery_max_active': 2,
@@ -95,6 +97,7 @@ class CephHooksTestCase(unittest.TestCase):
                     'mon_hosts': '10.0.0.1 10.0.0.2',
                     'old_auth': False,
                     'osd': {'osd max write size': 1024},
+                    'crush_initial_weight': '0',
                     'osd_journal_size': 1024,
                     'osd_max_backfills': 1,
                     'osd_recovery_max_active': 2,
@@ -131,6 +134,7 @@ class CephHooksTestCase(unittest.TestCase):
                     'mon_hosts': '10.0.0.1 10.0.0.2',
                     'old_auth': False,
                     'osd': {'osd max write size': 1024},
+                    'crush_initial_weight': '0',
                     'osd_journal_size': 1024,
                     'osd_max_backfills': 1,
                     'osd_recovery_max_active': 2,
